@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyController;
@@ -60,6 +61,16 @@ Route::group(["prefix" => "admin", "as" => "admin."], function () {
     Route::post("/users/update/{id}", [UserController::class, "update"])->name("users.update");
     Route::get("/users/destroy", [UserController::class, "destroy"])->name("users.destroy");
     Route::get("/users/{id}", [UserController::class, "show"])->name("users.show");
+
+
+
+    Route::get("/address", [AddressController::class, "index"])->name("address.index");
+    Route::get("/address/create", [AddressController::class, "create"])->name("address.create");
+    Route::post("/address/store", [AddressController::class, "store"])->name("address.store");
+    Route::get("/address/edit/{id}", [AddressController::class, "edit"])->name("address.edit");
+    Route::post("/address/update/{id}", [AddressController::class, "update"])->name("address.update");
+    Route::get("/address/destroy", [AddressController::class, "destroy"])->name("address.destroy");
+    Route::get("/address/{id}", [AddressController::class, "show"])->name("address.show");
 
 
 });

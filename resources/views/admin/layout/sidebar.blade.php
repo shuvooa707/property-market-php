@@ -91,6 +91,31 @@
             </li>
             <!-- End Company -->
 
+            <!-- Address -->
+            <li class="cursor-pointer">
+                <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="address" data-collapse-toggle="address">
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Address</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                <ul id="address" class="hidden py-2 space-y-2">
+                    <li class="bg-blue-600 ">
+                        <a href="/admin/address" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                            <i class="fa-regular fa-eye mx-3"></i>
+                            View
+                        </a>
+                    </li>
+                    <li class="bg-blue-600 ">
+                        <a href="/admin/address/create" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                            <i class="fa-solid fa-plus mx-3"></i>
+                            Create
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- End Address -->
+
             <!-- User -->
             <li class="cursor-pointer">
                 <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="user" data-collapse-toggle="user">

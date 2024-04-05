@@ -30,7 +30,7 @@
             <div class="w-full grid grid-cols-1">
                 <!-- Company Email -->
                 <div class="mb-5 mx-5">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Name</label>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Email</label>
                     <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Name" required>
                 </div>
                 <!-- End Company Email -->
@@ -39,7 +39,7 @@
             <div class="w-full grid grid-cols-1">
                 <!-- Company Address -->
                 <div class="mb-5 mx-5">
-                    <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Name</label>
+                    <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
                     <select id="category_id" name="address_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         @foreach($addresses as $address)
                             <option value="{{ $address->id }}">
