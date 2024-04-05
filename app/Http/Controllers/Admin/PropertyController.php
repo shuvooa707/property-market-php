@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Property;
@@ -32,9 +33,11 @@ class PropertyController extends Controller
     {
         $companies = Company::all();
         $categories = Category::all();
+        $addresses = Address::all();
         return view("admin.property.create", [
             "companies" => $companies,
             "categories" => $categories,
+            "addresses" => $addresses
         ]);
     }
 
@@ -62,6 +65,7 @@ class PropertyController extends Controller
 
             "category_id" => $request->get("category_id"),
             "company_id" => $request->get("company_id"),
+            "address_id" => $request->get("address_id"),
         ]);
 
         collect($request->imageFiles)

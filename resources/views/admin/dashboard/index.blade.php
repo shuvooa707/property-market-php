@@ -5,23 +5,38 @@
     <!-- Main Content -->
     <div class="flex-1 bg-gray-200 mt-5">
         <div class="p-6">
-            <h1 class="text-2xl font-semibold bg-blue-200 p-3 rounded">Dashboard</h1>
+            <h1 class="text-2xl font-semibold bg-blue-200 p-3 rounded">
+                <span class="mdi mdi-monitor-dashboard"></span>
+                Dashboard
+            </h1>
             <div class="mt-4 grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 gap-6">
                 <!-- Cards/Widgets -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold">Total Property</h2>
+                    <h2 class="text-xl font-semibold">
+                        <span class="mdi mdi-home-city text-blue-500 text-4xl"></span>
+                        Total Property
+                    </h2>
                     <p class="text-3xl font-bold mt-2">{{ $properties->count() }}</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold">Total Reviews</h2>
+                    <h2 class="text-xl font-semibold">
+                        <span class="mdi mdi-message-draw text-red-500 text-4xl"></span>
+                        Total Reviews
+                    </h2>
                     <p class="text-3xl font-bold mt-2">{{ $reviews->count() }}</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold">Total Company</h2>
+                    <h2 class="text-xl font-semibold">
+                        <span class="mdi mdi-domain text-green-500 text-4xl"></span>
+                        Total Company
+                    </h2>
                     <p class="text-3xl font-bold mt-2">{{ $companies->count() }}</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold">Total Users</h2>
+                    <h2 class="text-xl font-semibold">
+                        <span class="mdi mdi-account-group text-orange-500 text-4xl"></span>
+                        Total Users
+                    </h2>
                     <p class="text-3xl font-bold mt-2">{{ $users->count() }}</p>
                 </div>
 

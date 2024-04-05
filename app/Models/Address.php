@@ -16,4 +16,9 @@ class Address extends Model
     {
         return $this->hasMany(Company::class);
     }
+
+    public function getFullAttribute()
+    {
+        return $this->street . ", " . $this->city. ", " . $this->zip_code . ", " . $this->state . ", " . $this->country;
+    }
 }

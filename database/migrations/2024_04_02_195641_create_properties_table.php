@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger("company_id");
+            $table->unsignedBigInteger("address_id");
 
             $table->timestamps();
         });
