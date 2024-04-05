@@ -5,7 +5,7 @@
 	<!--  Main Content  -->
 	<section class="grid grid-cols-12 px-5 bg-gray-300 justify-between h-full" style="overflow: hidden">
 		<!-- Left Section -->
-		<div class="col-span-12 px-2">
+		<div class="col-span-8 px-2">
 			<div class="bg-blue-100 shadow px-2 py-.5 rounded-md">
 				<h4 class="my-3 mr-10  text-blue-900 leading-normal uppercase font-medium	">
 					<a class="text-blue-500" href="{{ route('admin.property.index') }}">All</a> \
@@ -43,7 +43,7 @@
 		<!-- End Left Section -->
 
 		<!-- Right Section -->
-		<div class="col-span-8 grid grid-cols-2 mt-2 align-between px-2">
+		<div class="col-span-4 grid grid-cols-2 mt-2 align-between px-2">
             <section>
                 <table class="col-span-2 p-2 w-full divide-y text-gray-950 divide-gray-200">
                     <thead class="bg-blue-600 text-blue-50 py-2">
@@ -125,35 +125,6 @@
             </section>
 		</div>
 		<!-- End Right Section -->
-		<script>
-			const tabs = document.querySelectorAll('.tabs');
-			tabs.forEach(tab => {
-				tab.addEventListener('click', e => {
-					if (e.target.tagName === 'A') {
-						// Remove 'active' class from all tabs
-						tabs.forEach(tab => {
-							tab.querySelectorAll('a').forEach(link => {
-								link.classList.remove('active');
-							});
-						});
-
-						// Add 'active' class to the clicked tab
-						e.target.classList.add('active');
-
-						const target = e.target.getAttribute('href').substr(1);
-						const contents = document.querySelectorAll('.content');
-						contents.forEach(content => {
-							if (content.getAttribute('id') === target) {
-								content.classList.remove('hidden');
-							} else {
-								content.classList.add('hidden');
-							}
-						});
-					}
-				});
-			});
-
-		</script>
 	</section>
 	<!-- End Main Content  -->
 @endsection
