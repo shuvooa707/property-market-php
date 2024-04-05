@@ -13,44 +13,32 @@
 					<span>{{  $property->title }}</span>
 				</h4>
 			</div>
+
+
 			<!-- slider carousel-->
-			<div class="grid grid-cols-2">
-				<div class="carousel" style="max-height: 600px">
-					<div id="slide1" class="carousel-item relative w-full">
-						<img src="{{ $property->thumbnail }}" class="">
-						<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-							<a href="#slide4" class="btn btn-circle">❮</a>
-							<a href="#slide2" class="btn btn-circle">❯</a>
-						</div>
-					</div>
-					@foreach($property->images as $image)
-						<div id="slide2"
-						     class="carousel-item relative w-full transition-transform duration-500 ease-in-out">
-							<img src="{{ $image->path }}"
-							     class="w-full">
-							<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-								<a href="#slide1" class="btn btn-circle">❮</a>
-								<a href="#slide3" class="btn btn-circle">❯</a>
-							</div>
-						</div>
-					@endforeach
+			<section class="splide" style="max-height: 600px; overflow: hidden;" aria-label="Splide Basic HTML Example">
+				<div class="splide__track">
+					<ul class="splide__list">
+						<li class="splide__slide" style="max-height: 600px">
+							<img style="width: 100%; height: 100%" src="/{{ $property->thumbnail }}" class="w-full">
+						</li>
+						@foreach($property->images as $image)
+							<li class="splide__slide">
+								<img src="/{{ $image->path }}" class="w-full"  alt="image" />
+							</li>
+						@endforeach
+					</ul>
 				</div>
-				<div class="rounded-md border" style="max-height: 600px; overflow: hidden">
-					<div style="max-width:100%;list-style:none; transition: none;overflow:hidden;width:100vw;max-height: 600px;">
-						<div id="gmap-canvas" style="max-height:600px; width:100%;max-width:100%;">
-							<iframe style="height:100%;width:100%;border:0;" frameborder="0"
-							        src="https://www.google.com/maps/embed/v1/place?q=Dhaka,+Bangladesh&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
-						</div>
-						<style>
-							#gmap-canvas img {
-                                max-height: none;
-                                max-width: none !important;
-                                background: none !important;
-                            }
-						</style>
-					</div>
-				</div>
-			</div>
+			</section>
+			<script>
+				var splide = new Splide( '.splide', {
+					type   : 'loop',
+					padding: '5rem',
+				} );
+				splide.mount();
+			</script>
+			<!-- End slider carousel-->
+
 		</div>
 		<!-- End Left Section -->
 
