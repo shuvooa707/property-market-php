@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(["prefix" => "admin", "as" => "admin."], function () {
@@ -24,11 +25,12 @@ Route::group(["prefix" => "admin", "as" => "admin."], function () {
 
     Route::get("/property", [PropertyController::class, "index"])->name("property.index");
     Route::get("/property/create", [PropertyController::class, "create"])->name("property.create");
+    Route::post("/property/create/image-upload", [PropertyController::class, "imageUpload"])->name("property.create.image-upload");
     Route::post("/property/store", [PropertyController::class, "store"])->name("property.store");
     Route::get("/property/{id}", [PropertyController::class, "show"])->name("property.show");
     Route::get("/property/edit/{id}", [PropertyController::class, "edit"])->name("property.edit");
     Route::post("/property/update/{id}", [PropertyController::class, "update"])->name("property.update");
-    Route::get("/property/destroy", [PropertyController::class, "destroy"])->name("property.destroy");
+    Route::post("/property/destroy/{id}", [PropertyController::class, "destroy"])->name("property.destroy");
 
     Route::get("/category", [CategoryController::class, "index"])->name("category.index");
     Route::get("/category/create", [CategoryController::class, "create"])->name("category.create");

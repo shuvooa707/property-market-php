@@ -30,6 +30,120 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"
             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
+    <!--  JQuery Magnify JS  -->
+    <script src="{{ asset('assets/simple-jquery-zoom-image-on-hover/js/jquery.zoom.js') }}"></script>
+
+    <!--  JQuery Magnify CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/simple-jquery-zoom-image-on-hover/css/style.css') }}">
+
+
+    <!--  Slick Slider  -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!--  End Slick Slider  -->
+
+    <style>
+        .html {
+            height: 100%;
+        }
+        .slick-container {
+            height: 70%;
+            border-radius: 0;
+        }
+        .slick-slider, .slick-list, .slick-track {
+            height: 100%;
+            border-radius: 0;
+        }
+
+        .slick-slide {
+            height:450px;
+            border-radius: 0;
+        }
+
+        .slick-slide img {
+            height:450px;
+            border-radius: 0;
+        }
+        .slick-active, .slick-track {
+            border-radius: 0;
+        }
+        .splide__arrow {
+            background: transparent;
+            width: 2em!important;
+            height: 2em!important;
+        }
+        .splide__arrow svg {
+            width: 2em!important;
+            height: 2em!important;
+        }
+
+             /* Default color for the marquee */
+         #marquee {
+             background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+             -webkit-background-clip: text;
+             color: white;
+         }
+
+        .gemini {
+            background: radial-gradient(circle,blue,white);
+            background-clip: text;
+            color: transparent;
+            animation: gemini 15s linear infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes gemini {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100%{
+                background-position: 0% 0%;
+            }
+        }
+
+        .gemini-2 {
+            background: radial-gradient(circle,blue,white);
+            background-clip: text;
+            color: transparent;
+            animation: gemini-2 10s linear infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes gemini-2 {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100%{
+                background-position: 0% 0%;
+            }
+        }
+        .gemini-3 {
+            background: radial-gradient(circle,blue,red);
+            background-clip: text;
+            color: transparent;
+            animation: gemini-3 15s linear infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes gemini-3 {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100%{
+                background-position: 0% 0%;
+            }
+        }
+    </style>
+
+
+    @yield("styles")
+
     <title>Property Market</title>
 </head>
 <body class="bg-gray-300">
@@ -45,12 +159,13 @@
 </button>
 
 
+@include("layout.marquebar")
 @include("layout.topbar")
-@include("layout.sidebar")
+{{--@include("layout.sidebar")--}}
 
 
 <!--  Main Content  -->
-<div style="margin-left: 280px; margin-top: 150px">
+<div>
     @yield("main")
 </div>
 <!-- End Main Content  -->

@@ -40,6 +40,10 @@ class AddressController extends Controller
             "zip_code" => $request->get("zip_code"),
         ]);
 
+        if ( $request->has("back") ) {
+            return redirect($request->get("back"));
+        }
+
         return redirect()->route("admin.address.index");
     }
 

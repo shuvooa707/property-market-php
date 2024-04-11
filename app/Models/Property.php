@@ -30,4 +30,18 @@ class Property extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function getAvgratingAttribute()
+    {
+        if ( !$this->reviews->count() ) return 0;
+        $rating = $this->reviews->reduce(function ($left, $right){
+            return $left + $right->rating;
+        });
+        return $rating / $this->reviews->count();
+    }
 }

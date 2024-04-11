@@ -1,10 +1,14 @@
 @extends("admin.layout.DashboardLayout")
 
+@section("script")
+	<script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+
+@endsection
 
 @section("main")
 	<!--  Main Content  -->
-	<section class="grid grid-cols-1 w-2/4 rounded rounded-md m-5 dark:bg-gray-500 mx-auto items-center"
-	         style="margin-left: 480px">
+	<section class="grid grid-cols-1 p-8 rounded rounded-md m-5 dark:bg-gray-500 mx-auto items-center"
+	         style="margin-left: 0px">
 		<div class="grid grid-cols-4 my-3 text-center">
 			<a href="/admin/property/"
 			   class="bg-red-50 text-blue-600 px-2 py-2 rounded rounded-m cursor-pointer w-full my-5 flex items-center">
@@ -19,13 +23,14 @@
 			      class="w-full grid grid-cols-1 px-8 pb-8 mx-auto">
 				@csrf
 				<!-- Image Uploader -->
-				<div class="grid grid-cols-2">
+				<div class="grid grid-cols-2 gap-4">
+
 					<!-- Property Thumbnail -->
 					<div class="mb-5 mx-5">
 						<label for="thumbnailFile"
 						       class="cursor-pointer block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 							<span class="my-3"> Property Thumbnail</span>
-							<img id="thumbnailFilePreview" class="h-2/4 rounded border-white max-w-full mt-4"
+							<img id="thumbnailFilePreview" class="h-1/4 rounded border-white max-w-full mt-4"
 							     src="https://flowbite.com/docs/images/examples/image-1@2x.jpg" alt="image description">
 						</label>
 						<input onchange="loadFile()" accept="image/*" type="file" name="thumbnailFile"
@@ -33,18 +38,59 @@
 						       required>
 					</div>
 					<!-- End Property Thumbnail -->
+
 					<!-- Property Images -->
 					<div class="mb-5 mx-5">
 						<label for="imageFiles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Property
 							Images</label>
 						<input type="file" name="imageFiles[]" id="imageFiles"
-						       class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+						       class="shadow-sm bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 						       placeholder="title" multiple required>
+						<div id="dvPreview" class="bg-gray-50 mt-5 border rounded">
+						</div>
 					</div>
+
+					<script language="javascript" type="text/javascript">
+						window.onload = function () {
+							var fileUpload = document.getElementById("imageFiles");
+							fileUpload.onchange = function () {
+								if (typeof (FileReader) != "undefined") {
+									var dvPreview = document.getElementById("dvPreview");
+									dvPreview.innerHTML = "";
+									var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+									for (var i = 0; i < fileUpload.files.length; i++) {
+										var file = fileUpload.files[i];
+										if (regex.test(file.name.toLowerCase())) {
+											var reader = new FileReader();
+											reader.onload = function (e) {
+												var img = document.createElement("IMG");
+												img.height = "100";
+												img.width = "100";
+												img.src = e.target.result;
+												img.classList.add("d-inline")
+												img.classList.add("inline")
+												img.classList.add("m-2")
+												dvPreview.appendChild(img);
+											}
+											reader.readAsDataURL(file);
+										} else {
+											alert(file.name + " is not a valid image file.");
+											dvPreview.innerHTML = "";
+											return false;
+										}
+									}
+								} else {
+									alert("This browser does not support HTML5 FileReader.");
+								}
+							}
+						};
+					</script>
 					<!-- End Property Images -->
+
 				</div>
 				<!-- End Image Uploader -->
-				<div class="w-full grid grid-cols-2">
+
+				<div class="w-full grid grid-cols-2 gap-4">
 					<!-- Property Name -->
 					<div class="mb-5 mx-5">
 						<label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Property
@@ -129,16 +175,20 @@
 					<!-- Address -->
 					<div class="mb-5 mx-5">
 						<label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-						<select id="category_id" name="address_id"
-						        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						        required>
-							@foreach($addresses as $address)
-								<option value="{{ $address->id }}">
-									{{ $address->street }}, {{ $address->city }}, {{ $address->zip_code }}
-									, {{ $address->state }}, {{ $address->country }},
-								</option>
-							@endforeach
-						</select>
+						<section class="flex">
+							<select id="category_id" name="address_id"
+							        class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							        style="min-width: 90%"
+							        required>
+								@foreach($addresses as $address)
+									<option value="{{ $address->id }}">
+										{{ $address->street }}, {{ $address->city }}, {{ $address->zip_code }}
+										, {{ $address->state }}, {{ $address->country }},
+									</option>
+								@endforeach
+							</select>
+							<a href="{{ route('admin.address.create', [ 'back' => route('admin.property.create') ]) }}" class="btn bg-gray-100 mx-2 p-2 rounded-xl border" style="max-width: 10%;">Add</a>
+						</section>
 					</div>
 					<!-- End Address -->
 
@@ -169,25 +219,38 @@
 					</div>
 					<!-- End Available -->
 
-					<!-- Description -->
-					<div class="mb-5 mx-5">
-						<label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-						<textarea id="description" name="description" rows="4"
-						          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						          placeholder="Description..."></textarea>
-					</div>
-					<!-- End Description -->
-
 
 					<!-- location -->
-					<div class="mb-5 mx-5">
-						<label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
-						<textarea id="location" name="location" rows="4"
-						          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						          placeholder="location..."></textarea>
+					<div class="mb-5 mx-5 ">
+						<label for="location" class="block m-3 mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+						<input type="text" id="location" name="location" rows="4"
+						          class="block m-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						          placeholder="location..." />
 					</div>
 					<!-- End location -->
 
+					<!-- Summery -->
+					<div class="mb-5 mx-5 col-span-2">
+						<label for="summery" class="block mb-2 m-3 text-sm font-medium text-gray-900 dark:text-white">Summery</label>
+						<!-- The toolbar will be rendered in this container. -->
+						<textarea name="summery" class="block m-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+					</div>
+					<!-- End Summery -->
+
+					<!-- Description -->
+					<div class="mb-5 mx-5 col-span-2">
+						<label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+						<!-- The toolbar will be rendered in this container. -->
+						<div id="toolbar-container"></div>
+						<textarea name="description"></textarea>
+					</div>
+					<!-- End Description -->
+					<script>
+						CKEDITOR.replace( 'description', {
+							height: 300,
+							filebrowserUploadUrl: "{{ route('admin.property.create.image-upload') }}"
+						});
+					</script>
 
 				</div>
 

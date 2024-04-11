@@ -20,9 +20,11 @@ class PropertyController extends Controller
     public function index()
     {
         $properties = Property::paginate(10);
+        $categories = Category::all();
 
         return view("admin.property.index", [
-            "properties" => $properties
+            "properties" => $properties,
+            "categories" => $categories
         ]);
     }
 
@@ -41,6 +43,21 @@ class PropertyController extends Controller
         ]);
     }
 
+    public function imageUpload(Request $request)
+    {
+        // upload image
+        $file = $request->file("upload");
+        $fileName = Str::uuid()  . "." . $file->getClientOriginalExtension();
+        $url = url($file->storeAs("uploads/" . $fileName));
+
+        $function_number = $request->get("CKEditorFuncNum");
+//        $url = "https://en.wikipedia.org/wiki/Nokia_N900#/media/File:Nokia_N900.JPG";
+        $message = "";
+
+        return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($function_number, '$url', '$message');</script>";
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -54,6 +71,7 @@ class PropertyController extends Controller
         $property = Property::create([
             "title" => $request->get("title"),
             "thumbnail" => $thumbnail,
+            "summery" => $request->get("summery"),
             "description" => $request->get("description"),
             "price" => $request->get("price"),
             "bedrooms" => $request->get("bedrooms"),
@@ -99,10 +117,12 @@ class PropertyController extends Controller
         $property = Property::find($id);
         $companies = Company::all();
         $categories = Category::all();
+        $addresses = Address::all();
         return view("admin.property.edit", [
             "property" => $property,
             "companies" => $companies,
             "categories" => $categories,
+            "addresses" => $addresses
         ]);
     }
 
@@ -124,7 +144,8 @@ class PropertyController extends Controller
         $property->update([
             "title" => $request->get("title", $property->title),
             "thumbnail" => $thumbnail,
-            "description" => $request->get("description", $property->title),
+            "description" => $request->get("description", $property->description),
+            "summery" => $request->get("summery", $property->summery),
             "price" => $request->get("price", $property->price),
             "bedrooms" => $request->get("bedrooms", $property->bedrooms),
             "bathrooms" => $request->get("bathrooms", $property->bathrooms),
@@ -145,6 +166,12 @@ class PropertyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $property = Property::find($id);
+
+        if ( $property ) {
+            $property->delete();
+        }
+
+        return redirect()->route("admin.property.index");
     }
 }

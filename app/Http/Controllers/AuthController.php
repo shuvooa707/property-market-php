@@ -81,8 +81,12 @@ class AuthController extends Controller
         ]);
 
         if ( $auth ) {
+            if ( $request->has("back") ) {
+                return redirect($request->get("back"));
+            }
             return redirect()->route("home");
         }
+
 
         return redirect()->back();
     }

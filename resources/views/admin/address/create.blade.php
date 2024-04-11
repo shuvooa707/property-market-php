@@ -5,12 +5,24 @@
 	<!--  Main Content  -->
 	<section class="grid grid-cols-1 w-2/4 rounded rounded-md  m-5 mt-7 bg-white dark:bg-gray-500 mx-auto items-center"
 	         style="margin-left: 480px">
-		<h2 class=" bg-gray-900 text-white text-center p-5 mb-2 w-full">
+		@if(request()->has("back"))
+		<h2 class="bg-gray-50 p-2 my-3 border rounded-sm">
+			<a class="text-blue-500" href="{{ request()->get("back") }}">Back</a>
+		</h2>
+		@endif
+		<h2 class=" bg-gray-900 text-white text-center p-5 py-4 mb-2 w-full">
 			<span>Add New Address</span>
 		</h2>
-		<form method="post" action="{{ route('admin.address.store') }}" enctype="multipart/form-data"
+		<form method="post"
+		      action="{{ route('admin.address.store') }}"
+		      enctype="multipart/form-data"
 		      class="w-full grid grid-cols-1 px-8 pb-8 mx-auto">
 			@csrf
+
+			@if(request()->has("back"))
+				<input type="hidden" name="back" value="{{ request()->get("back") }}">
+			@endif
+
 			<div class="w-full grid grid-cols-1">
 				<!-- street -->
 				<div class="mb-5 mx-5">

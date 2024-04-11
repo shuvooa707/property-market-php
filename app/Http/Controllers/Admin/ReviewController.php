@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -34,7 +35,14 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Review::create([
+            "content" => $request->get("content"),
+            "rating" => $request->get("rating"),
+            "property_id" => $request->get("property_id"),
+            "user_id" => Auth::user()->id
+        ]);
+
+        return redirect()->back();
     }
 
     /**

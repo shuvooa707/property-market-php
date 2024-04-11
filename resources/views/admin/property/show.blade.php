@@ -11,10 +11,10 @@
 					{{ $property->title }}
 				</h3>
 				<!-- slider carousel-->
-				<section class="splide" style="max-height: 600px; overflow: hidden;" aria-label="Splide Basic HTML Example">
-					<div class="splide__track">
+				<section class="splide" style="cursor: move; max-height: 600px; overflow: hidden;" aria-label="Splide Basic HTML Example">
+					<div class="splide__track" style="cursor: move;">
 						<ul class="splide__list">
-							<li class="splide__slide" style="max-height: 600px">
+							<li class="splide__slide" style="cursor: move; max-height: 600px">
 								<img style="height: 100%" src="/{{ $property->thumbnail }}" class="">
 							</li>
 							@foreach($property->images as $image)
@@ -43,8 +43,8 @@
 					<tbody class="bg-white divide-y divide-gray-200">
 					<tr>
 						<td colspan="2" class="p-2">
-							<strong class="text-gray-950 block underline">Description</strong>
-							<span class="text-gray-800">{{ $property->description }}</span>
+							<strong class="text-gray-950 block underline">Summery</strong>
+							<span class="text-gray-800">{{ $property->summery }}</span>
 						</td>
 					</tr>
 					<tr>

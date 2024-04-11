@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -86,6 +87,7 @@ class AuthController extends Controller
             return redirect()->route("admin.dashboard");
         }
 
+
         return redirect()->back();
     }
 
@@ -96,6 +98,11 @@ class AuthController extends Controller
             "email" => $request->get("email"),
             "password" => Hash::make($request->get("password"))
         ]);
+
+        $image = $request->file("image");
+        $filename = Str::uuid() . "." . $image->getClientOriginalExtension();
+        $image->store("/uploads/" . $filename);
+
         Auth::login($user);
 
         return redirect()->route("home");

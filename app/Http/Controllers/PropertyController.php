@@ -15,21 +15,25 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties = Property::all();
+        $properties = Property::paginate(9);
         $reviews = Review::all();
+        $categories = Category::all();
 
 
         return view("property.index", [
             "properties" => $properties,
             "reviews" => $reviews,
+            "categories" => $categories,
             "slug" => \request()->url()
         ]);
     }
     public function byCategory(Request $request, $id)
     {
         $properties = Property::where("category_id", $id)->get();
+        $categories = Category::all();
         return view("property.byCategory", [
-            "properties" => $properties
+            "properties" => $properties,
+            "categories" => $categories
         ]);
     }
 
@@ -58,6 +62,12 @@ class PropertyController extends Controller
         return view("property.show", [
             "property" => $property
         ]);
+    }
+
+    public function scrollMore(Request $request)
+    {
+        $properties = Property::paginate(9);
+        return $properties;
     }
 
     /**

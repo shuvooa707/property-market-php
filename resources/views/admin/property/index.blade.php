@@ -60,14 +60,15 @@
                         {{ $property->location }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="/admin/property/{{$property->id}}" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        <a href="/property/{{$property->id}}" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                             View
                         </a>
-                        <a href="/admin/property/edit/{{$property->id}}" class="cursor-pointer text-gray-800 bg-amber-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-amber-500 dark:hover:bg-amber-600 focus:outline-none dark:focus:ring-blue-800">
+                        <a href="/admin/property/edit/{{$property->id}}" class="cursor-pointer text-blue-100 bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-amber-500 dark:hover:bg-amber-600 focus:outline-none dark:focus:ring-blue-800">
                             Edit
                         </a>
-                        <form action="/admin/property/delete/{{$property->id}}" method="post" class="inline">
-                            <button type="submit" class="cursor-pointer text-white bg-amber-700 hover:bg-orange-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none dark:focus:ring-blue-800">
+                        <form action="{{ route('admin.property.destroy', ['id' => $property->id]) }}" method="post" class="inline">
+                            @csrf
+                            <button type="submit" class="cursor-pointer text-white bg-red-700 hover:bg-orange-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none dark:focus:ring-blue-800">
                                 Delete
                             </button>
                         </form>

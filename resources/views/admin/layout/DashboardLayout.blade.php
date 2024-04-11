@@ -17,6 +17,8 @@
     <!--  End Splide  -->
 
 
+    @yield("script")
+
 </head>
 <body class="bg-gray-600">
 
