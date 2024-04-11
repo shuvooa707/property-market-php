@@ -13,7 +13,7 @@
 <div class="min-h-screen flex items-center justify-center">
 	<div class="bg-white p-8 rounded-lg shadow-md w-96">
 		<h2 class="text-2xl font-semibold mb-4">Register</h2>
-		<form action="/register" method="POST">
+		<form action="/register" method="POST" enctype="multipart/form-data">
 			@csrf
 			<div class="mb-4">
 				<label for="image" class="block text-gray-700">

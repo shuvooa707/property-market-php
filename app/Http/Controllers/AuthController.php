@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -93,10 +94,16 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $image = $request->file("image");
+        $filename = Str::uuid() .".". $image->getClientOriginalExtension();
+        $path = $image->store("/uploads/" . $filename);
+
+
         $user = User::create([
             "name" => $request->get("name"),
             "email" => $request->get("email"),
-            "password" => Hash::make($request->get("password"))
+            "password" => Hash::make($request->get("password")),
+            "image" => $path
         ]);
         Auth::login($user);
 
