@@ -63,10 +63,8 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        $thmbFile = $request->file("thumbnailFile");
-        $thumbnail = $thmbFile->storeAs("/uploads", Str::uuid() . "." . $thmbFile->getClientOriginalExtension());
+        $thumbFile = $request->file("thumbnailFile");
+        $thumbnail = $thumbFile->storeAs("/uploads", Str::uuid() . "." . $thumbFile->getClientOriginalExtension());
 
         $property = Property::create([
             "title" => $request->get("title"),

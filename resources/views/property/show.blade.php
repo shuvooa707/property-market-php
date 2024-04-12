@@ -120,57 +120,58 @@
 						</thead>
 						<tbody class="bg-white divide-y divide-gray-200">
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								<span class="mdi mdi-relative-scale"></span>
 								Total Area
 							</td>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
                                 <span>
                                     {{ $property->sqft }}
                                 </span><sup>sqft</sup>
 							</td>
 						</tr>
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								<strong class="mdi mdi-balcony"></strong>
 								Balconies
 							</td>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								{{ $property->balconies }} m<sup>2</sup>
 							</td>
 						</tr>
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								<span class="mdi mdi-garage"></span>
 								Garages
 							</td>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								{{ $property->garages }}
 							</td>
 						</tr>
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								<span class="mdi mdi-bed-clock"></span>
 								Bedrooms
 							</td>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								{{ $property->bedrooms }}
 							</td>
 						</tr>
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								<span class="mdi mdi-bathtub"></span>
 								Bathrooms
 							</td>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								{{ $property->bathrooms }}
 							</td>
 						</tr>
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
+								<span class="mdi mdi-star"></span>
 								Rating
 							</td>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								@if( $property->reviews->count() )
 									@for($i = 0; $i< $property->avgrating; $i++)
 										<span class="mdi mdi-star text-green-600"></span>
@@ -181,11 +182,11 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="px-6 py-4 whitespace-nowrap">
+							<td class="px-6 py-2 whitespace-nowrap">
 								<span class="mdi mdi-balcony"></span>
 								Address
 							</td>
-							<td class="px-6 py-4">
+							<td class="px-6 py-2">
 								<i class="fa-solid fa-location-dot fa-fw text-red-600"></i>
 								{{ $property->address->street }},
 								{{ $property->address->zip_code }},
@@ -196,7 +197,7 @@
 						</tr>
 						</tbody>
 					</table>
-					<div class="bg-gray-100 px-10 py-3 text-center my-4">
+					<div class="bg-gray-100 px-10 py-2 text-center my-4">
 						<p>Estimated Price</p>
 						<h1 class="text-4xl text-gray-700">
 							RUB <span>{{ $property->price }}</span><sup>₽</sup>

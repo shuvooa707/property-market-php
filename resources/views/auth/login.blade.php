@@ -30,6 +30,9 @@
                 <button type="submit" class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Login</button>
                 <a href="#" class="text-indigo-500 hover:text-indigo-700">Forgot Password?</a>
             </div>
+            <div class="flex items-center justify-between mt-3">
+                <a href="{{ route('register.page') }}" class="text-indigo-900 hover:text-indigo-700">Create New Account</a>
+            </div>
         </form>
     </div>
 </div>

@@ -31,9 +31,11 @@ class PropertyController extends Controller
     {
         $properties = Property::where("category_id", $id)->get();
         $categories = Category::all();
+        $category = Category::find($id);
         return view("property.byCategory", [
             "properties" => $properties,
-            "categories" => $categories
+            "categories" => $categories,
+            "category" => $category
         ]);
     }
 

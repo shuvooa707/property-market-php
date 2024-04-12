@@ -20,7 +20,7 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => fake()->title,
+            "title" => fake()->company,
             "thumbnail" => "uploads/default.png",
             "summery" => fake()->text(),
             "description" => fake()->text(),

@@ -14,8 +14,13 @@
             </h1>
         @else
             <!--  If filter By Category  -->
-            <div class="p-3 m-5 rounded rounded-md bg-white text-gray-950">
-                <a href="/" class=" text-blue-600">All</a> \ <strong class=""></strong>
+            <div class="p-3 m-5 mx-8 rounded rounded-md bg-white text-gray-950">
+                <strong>
+                    {{ $category->name }}
+                </strong>
+                <strong class="bg-gray-300 text-gray-900 rounded-md p-1">
+                    {{ $category->properties->count() }}
+                </strong>
             </div>
             <!--  End If filter By Category  -->
             <div class="px-8">

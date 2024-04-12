@@ -22,6 +22,11 @@ return new class extends Migration
             $table->unsignedInteger("bathrooms");
             $table->unsignedInteger("balconies");
             $table->unsignedInteger("garages");
+            $table->unsignedInteger("swimming_pool")->default(0);
+            $table->unsignedInteger("hall")->default(0);
+            $table->unsignedInteger("terrace")->default(0);
+            $table->unsignedInteger("storeroom")->default(0);
+            $table->unsignedInteger("storeroom")->default(0);
             $table->boolean("is_available");
             $table->unsignedInteger("sqft");
 
