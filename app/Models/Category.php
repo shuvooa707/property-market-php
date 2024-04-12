@@ -11,6 +11,10 @@ class Category extends Model
     
     protected $guarded = [];
 
+    public function getNamewithiconAttribute()
+    {
+        return $this->icon ." ". $this->name;
+    }
 
     public function properties()
     {

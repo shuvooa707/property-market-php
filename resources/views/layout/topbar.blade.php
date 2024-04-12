@@ -16,7 +16,7 @@
 			@foreach(\App\Models\Category::all()->take(5) as $category)
 				<a href="/property/category/{{$category->id}}"
 				   class="text-white hover:bg-gray-700 px-4 py-2 rounded-md">
-					{{ $category->name }}
+					{!! $category->namewithicon !!}
 				</a>
 			@endforeach
 			<div id="dropdown-menu" class="relative" style="z-index: 9999">
@@ -27,13 +27,12 @@
 				<!-- Dropdown Content -->
 				<div id="dropdownContent" class="absolute top-full left-0 w-full bg-white shadow-md hidden"
 				     style="min-width: 200px; max-width: 250px; width: auto;">
-					@foreach(\App\Models\Category::all() as $category)
-						<a href="/property/category/{{$category->id}}"
-						   class="block px-4 py-2 bg-gray-900 text-gray-100 hover:bg-blue-900 hover:text-white-900">
-						<span class="bg-gray-700 px-1 py-0 mr-1 rounded-md">
-							{{ $category->properties->count() }}
-						</span>
-							{{ $category->name }}
+					@foreach($categories as $category)
+						<a href="/property/category/{{$category->id}}" class="block px-4 py-2 bg-gray-900 text-gray-100 hover:bg-blue-900 hover:text-white-900">
+							{!! $category->namewithicon !!}
+							<span class="bg-gray-700 px-1 py-0 mr-1 rounded-md">
+								{{ $category->properties->count() }}
+							</span>
 						</a>
 					@endforeach
 				</div>
@@ -54,8 +53,14 @@
 					dropdownContent.classList.add('hidden');
 				});
 			</script>
-			<a href="{{ route('about') }}" class="text-white hover:bg-gray-700 px-4 py-2 rounded-md">About</a>
-			<a href="{{ route('contact') }}" class="text-white hover:bg-gray-700 px-4 py-2 rounded-md">Contact</a>
+			<a href="{{ route('about') }}" class="text-white hover:bg-gray-700 px-4 py-2 rounded-md">
+				<span class="mdi mdi-information-variant"></span>
+				About
+			</a>
+			<a href="{{ route('contact') }}" class="text-white hover:bg-gray-700 px-4 py-2 rounded-md">
+				<span class="mdi mdi-account-box-outline"></span>
+				Contact
+			</a>
 		</div>
 
 		<!-- Search Bar -->

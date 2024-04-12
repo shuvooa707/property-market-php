@@ -247,52 +247,7 @@
 				</div>
 				<div id="properties-container" class="grid grid-cols-3 md:grid-cols-3 xl:grid-cols-3 px-8 m-5">
 					@foreach($properties as $property)
-						<div class="property bg-white overflow-hidden shadow-md my-4 mx-2">
-							<img class="w-full h-36 object-cover" src="/{{$property->thumbnail}}"
-							     alt="Card image cap">
-							<div class="p-3">
-								<h5 class="mb-2">
-									<a href="{{ route('property.show', ['id' => $property->id]) }}"
-									   class="text-blue-900 text-xl">
-										{{$property->title}}
-									</a>
-								</h5>
-								<h5 class="flex justify-between">
-									<small class="bg-gray-200 rounded p-1 px-3 text-gray-700">
-										{{$property->sqft}}sqft
-									</small>
-									<small class="bg-gray-200 rounded p-1 px-3 text-gray-700">
-										{{$property->price}} <b>₽</b>
-									</small>
-								</h5>
-								<h5 class="my-2 flex justify-between">
-									<small class="bg-blue-200 rounded p-1 px-4 text-gray-700">
-										<span class="mdi mdi-bed-clock"></span>
-										{{$property->bedrooms}}
-									</small>
-									<small class="bg-blue-200 rounded p-1 px-4 text-gray-700">
-										<span class="mdi mdi-bathtub"></span>
-										{{$property->bathrooms}}
-									</small>
-									<small class="bg-blue-200 rounded p-1 px-4 text-gray-700">
-										<span class="mdi mdi-garage"></span>
-										{{$property->garages}}
-									</small>
-									<small class="bg-blue-200 rounded p-1 px-4 text-gray-700">
-										<strong class="mdi mdi-balcony"></strong>
-										{{$property->balconies}}
-									</small>
-								</h5>
-								<hr>
-								<small class="text-gray-600 text-xm" style="">
-									{{ substr($property->summery, 0, 100) }}
-								</small>
-								<h5 class="mt-2">
-									<span class="bg-gray-100 px-2 py-1 m-0 mdi mdi-map-marker text-red-400"></span>
-									<small class="bg-gray-100 px-2 py-1">{{ $property->address->city }}</small>
-								</h5>
-							</div>
-						</div>
+						@include("layout.parts.CardProperty", [ "property" => $property ])
 					@endforeach
 				</div>
 			</div>

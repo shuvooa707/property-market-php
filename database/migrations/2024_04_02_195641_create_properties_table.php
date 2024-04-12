@@ -26,7 +26,6 @@ return new class extends Migration
             $table->unsignedInteger("hall")->default(0);
             $table->unsignedInteger("terrace")->default(0);
             $table->unsignedInteger("storeroom")->default(0);
-            $table->unsignedInteger("storeroom")->default(0);
             $table->boolean("is_available");
             $table->unsignedInteger("sqft");
 

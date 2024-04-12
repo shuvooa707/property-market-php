@@ -107,7 +107,7 @@
         }
 
         .gemini-2 {
-            background: radial-gradient(circle,blue,white);
+            background: radial-gradient(circle,red,white);
             background-clip: text;
             color: transparent;
             animation: gemini-2 10s linear infinite;
@@ -144,9 +144,9 @@
         }
     </style>
 
+    @yield("title")
     @yield("styles")
-
-    <title>Property Market</title>
+    @yield("scripts")
 </head>
 <body class="bg-gray-300">
 

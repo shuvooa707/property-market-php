@@ -33,6 +33,6 @@ Route::get("/property/category/{id}", [PropertyController::class, "byCategory"])
 Route::get("/about", [HomeController::class, "about"])->name("about");
 Route::get("/contact", [HomeController::class, "contact"])->name("contact");
 
-
+Route::get("test", [HomeController::class, "test"]);
 
 include_once "admin.php";
