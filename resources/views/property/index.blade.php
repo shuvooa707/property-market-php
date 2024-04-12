@@ -5,27 +5,27 @@
 @endsection
 
 @section("scripts")
-<script type="text/javascript" defer>
-	let title = document.title;
-	let flag = 1;
-	setInterval(()=>{
-		if(flag) {
-			document.title = `🚃`;
-			flag = 0;
-		}
-		else {
-			document.title = title;
-			flag = 1;
-		}
-	}, 2000)
-</script>
+	<script type="text/javascript" defer>
+		let title = document.title;
+		let flag = 1;
+		setInterval(() => {
+			if (flag) {
+				document.title = `🚃`;
+				flag = 0;
+			} else {
+				document.title = title;
+				flag = 1;
+			}
+		}, 2000)
+	</script>
 @endsection
 
 @section("styles")
 	<style type="text/css">
-		.review .content {
+        .review .content {
             position: relative;
-		}
+        }
+
         .review .content::after {
             content: '';
             position: absolute;
@@ -35,6 +35,72 @@
             transform: translateY(0%);
             border: 15px solid transparent;
             border-top-color: #e8eaed;
+        }
+
+        /*  Slick  */
+        .slick-slider {
+            position: relative;
+        }
+
+        .slick-prev {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            z-index: 9999;
+            color: rgba(255, 255, 255, 0.73);
+            font-size: 7em;
+            transform: translateY(-50%);
+            transition: .2s all linear;
+            background: rgba(255, 255, 255, 0.17);
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .slick-prev:hover {
+            background: rgba(255, 255, 255, 0.39);
+        }
+        .slick-next:hover {
+            background: rgba(255, 255, 255, 0.39);
+        }
+
+        .slick-prev span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .slick-next span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .slick-prev:hover {
+            color: rgb(255, 255, 255);
+        }
+
+        .slick-next {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            z-index: 9999;
+            color: rgba(255, 255, 255, 0.73);
+            font-size: 7em;
+            transform: translateY(-50%);
+            transition: .2s all linear;
+            background: rgba(255, 255, 255, 0.17);
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        .slick-next:hover {
+            color: rgb(255, 255, 255);
         }
 	</style>
 @endsection
@@ -61,9 +127,11 @@
 		</div>
 		<script>
 			$('.slick-slider').slick({
-				arrows: false,
+				arrows: true,
 				autoplay: true
 			});
+			document.querySelector(".slick-prev").innerHTML = `<span class="mdi mdi-chevron-left"></span>`;
+			document.querySelector(".slick-next").innerHTML = `<span class="mdi mdi-chevron-right"></span>`;
 		</script>
 		<!--  End Slick Slider  -->
 
@@ -79,22 +147,22 @@
 			<!--  Property List  -->
 			<div class="col-span-3">
 				@foreach($categories as $category)
-				<div class="px-3">
-					{{-- <div class="w-full bg-blue-500 rounded-s text-blue-50 px-5 py-3">Top Properties</div>--}}
-					<div id="properties-container" class="grid grid-cols-4 md:grid-cols-4 xl:grid-cols-4 px-1 m-0">
-						<div class="flex justify-between col-span-4 mt-2 border-b-2 border-black">
+					<div class="px-3">
+						{{-- <div class="w-full bg-blue-500 rounded-s text-blue-50 px-5 py-3">Top Properties</div>--}}
+						<div id="properties-container" class="grid grid-cols-4 md:grid-cols-4 xl:grid-cols-4 px-1 m-0">
+							<div class="flex justify-between col-span-4 mt-2 border-b-2 border-black">
 							<span class="bg-gray-900 text-gray-50 px-4 py-2">
 								{!! $category->namewithicon !!}
 							</span>
-							<a href="/property/category/{{$category->id}}" class="text-blue-700">
-								view all
-							</a>
+								<a href="/property/category/{{$category->id}}" class="text-blue-700">
+									view all
+								</a>
+							</div>
+							@foreach($category->properties->take(4) as $property)
+								@include("layout.parts.CardProperty", [ "property" => $property ])
+							@endforeach
 						</div>
-						@foreach($category->properties->take(4) as $property)
-							@include("layout.parts.CardProperty", [ "property" => $property ])
-						@endforeach
 					</div>
-				</div>
 				@endforeach
 			</div>
 			<!--  End Property List  -->

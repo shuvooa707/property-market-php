@@ -1,6 +1,6 @@
 <div class="property bg-white overflow-hidden shadow-md my-4 mx-1">
-	<img class="w-full h-36 object-cover" src="/{{$property->thumbnail}}"
-	     alt="Card image cap">
+	<img class="w-full h-36 object-cover" src="/{{$property->thumbnail}}" alt="Card image cap">
+	<span class="category-badge">{!! $property->category->namewithicon !!}</span>
 	<div class="p-3 pb-0" style="line-height: 1.4em">
 		<h5 class="mb-2">
 			<a href="{{ route('property.show', ['id' => $property->id]) }}"

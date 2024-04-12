@@ -1,92 +1,60 @@
-<!doctype html>
-<html
-		lang="en"
-		xmlns:th="http://www.thymeleaf.org"
-		th:fragment="layout(content)"
->
+@extends("layout.layout")
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<!--    <script src="https://cdn.tailwindcss.com"></script>-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-	      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-	      crossorigin="anonymous" referrerpolicy="no-referrer"/>
-	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-
-	<!-- Font -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-	      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-	      crossorigin="anonymous" referrerpolicy="no-referrer"/>
-	<!-- End Font -->
-
-
-	<!--  JQuery  -->
-	<script src="https://code.jquery.com/jquery-3.7.1.js"
-	        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
+@section("title")
 	<title>Property Market</title>
-</head>
-<body class="bg-gray-300">
+@endsection
 
-<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
-        type="button"
-        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-	<span class="sr-only">Open sidebar</span>
-	<svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-		<path clip-rule="evenodd" fill-rule="evenodd"
-		      d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-	</svg>
-</button>
+@section("scripts")
+	<script type="text/javascript" defer>
+		let title = document.title;
+		let flag = 1;
+		setInterval(()=>{
+			if(flag) {
+				document.title = `🚃`;
+				flag = 0;
+			}
+			else {
+				document.title = title;
+				flag = 1;
+			}
+		}, 2000)
+	</script>
+@endsection
 
+@section("styles")
+	<style type="text/css">
+        .review .content {
+            position: relative;
+        }
+        .review .content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            z-index: 9999;
+            left: 4px;
+            transform: translateY(0%);
+            border: 15px solid transparent;
+            border-top-color: #e8eaed;
+        }
+	</style>
+@endsection
 
-<nav id="topbar" class="bg-blue-700 w-full fixed flex justify-between align-middle top-0 z-50 justify-items-end"
-     aria-label="Sidebar">
-	<div style="width: 380px" class="inline-block bg-gray-900 px-5 py-5 text-white text-center">
-		<a href="/" class="w-full h-full block">Home</a>
-	</div>
-	<div class="right flex mt-5 mr-5 align-baseline justify-around">
-		<div class="mr-8">
-			<form class="p-0 m-0" method="get" action="/property/search">
-				<input type="text" class="rounded-md p-0 px-2" placeholder="Search Property" name="propertyName"
-				       id="search-property-input">
-			</form>
-		</div>
-		<div class="ml-8 mr-5">
-			<form class="p-0 m-0" method="post" action="/logout">
-				<button type="submit" class="btn bg-blue-900 px-2 rounded-md text-white">
-					Logout
-				</button>
-			</form>
-		</div>
-	</div>
-</nav>
-
-
-<!--  Main Content  -->
-<form class="" id="searchForm" method="get" action="/property/search">
-	<section class=" grid grid-cols-4"
-	         style="margin-top:100px; width: 90vw; position: relative; margin-left: 50%;  transform: translateX(-50%);">
+@section("main")
+	<form class="" id="searchForm" method="get" action="/property/search">
+		<!--  Main Content  -->
+		<section class="px-8 mx-8 mt-8 flex">
 
 		<!--  Search Panel  -->
-		<div class="col-span-1 bg-gray-50 shadow-md p-1" style="max-width: 480px">
+		<div class="col-span-1 bg-gray-50 shadow-md p-1" style="max-width: 380px">
 			<div class="text-center">
 				<strong>Price</strong>
 				<div class="flex">
 					<div class="w-2/4 p-1">
-						<input value="{{ \request()->get('from') }}" type="text"
-						       class="rounded-md w-full border-gray-300" name="from">
+						<input value="{{ \request()->get('from') }}" type="text" class=" bg-gray-50  rounded-md w-full border-gray-300" name="from">
 						<small>From</small>
 					</div>
 					<div class="w-2/4 p-1">
-						<input value="{{ \request()->get('to') }}" type="text" class="rounded-md w-full border-gray-300"
-						       name="to">
+						<input value="{{ \request()->get('to') }}" type="text" class=" bg-gray-50  rounded-md w-full border-gray-300" name="to">
 						<small class="">To</small>
 					</div>
 				</div>
@@ -99,24 +67,24 @@
 					</small>
 				</div>
 				<!--  Category Container  -->
-				<div class="w-full p-2" style="max-height: 600px; overflow-y: hidden;">
+				<div class="w-full p-2" style="max-height: 600px; overflow-x: hidden;">
 					<div class="w-full pb-3">
 						<input oninput="filterCategory(this)" type="text"
-						       class="p-1 py-0 m-1.5 rounded-md w-full border-gray-200" placeholder="Search Category">
+						       class=" bg-gray-50  p-1 py-0 m-1.5 rounded-md w-full border-gray-200" placeholder="Search Category">
 					</div>
-					<div style="max-height: 600px; overflow-y: auto;">
+					<div style="max-height: 600px; overflow-y: auto; overflow-x: hidden;">
 						@foreach($categories as $category)
 							<div data-value="{{ $category->name }}"
-							     class=" flex items-center mb-4 cursor-pointer">
+							     class=" flex items-center mb-4 cursor-pointer" style="overflow: hidden;">
 								{{--								<input type="hidden" id="categoriesSelected" name="category" value="{{ \request()->get('category') }}">--}}
 
 								<input name="categories[]" onchange="updateCategories()"
 								       id="category-{{ $category->id }}" type="checkbox"
 								       value="{{ $category->id }}"
 								       {{ in_array($category->id, \request()->get('categories') ?? []) ? 'checked' : '' }}
-								       class="category w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+								       class=" bg-gray-50  category w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
 								<label for="category-{{ $category->id }}"
-								       class="ms-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300">
+								       class=" bg-gray-50  ms-2 cursor-pointer text-sm font-medium text-gray-900">
 									{{ $category->name }}
 								</label>
 							</div>
@@ -141,13 +109,31 @@
 		<div class="col-span-3" style="">
 			<!--  Search Input  -->
 			<div class="px-8 m-5">
-				<div class="bg-gray-50 shadow-md flex justify-between">
+				<div class="bg-gray-50 py-2 shadow-md flex justify-between">
 					<input value="{{ \request()->get('propertyName') }}" id="search-property" type="text"
-					       name="propertyName" class="w-full outline-0 border-0" placeholder="Search By Property Name">
+					       name="propertyName" class="w-full bg-gray-50 p-1 outline-0 border-0" placeholder="Search By Property Name">
 
-					<div class="w-50 cursor-pointer">
-						<select autocomplete="on" name="sort" onchange="search()" id=""
-						        class="cursor-pointer border-0 bg-gray-50">
+					<div class="w-100 cursor-pointer flex text-gray-900">
+						<select autocomplete="on" name="city" onchange="search()" style="max-width: 220px" class="mx-8 cursor-pointer border-0 bg-gray-50">
+							@if( \request()->has('city') && strlen(\request()->get('city')) )
+							<option value="">
+								all
+							</option>
+							<option value="{{ \request()->get('city') }}" selected>
+								{{ \request()->get('city') }}
+							</option>
+							@else
+								<option value="">
+									all
+								</option>
+							@endif
+							@foreach($cities as $city)
+								<option value="{{ $city }}">
+									{{ $city }}
+								</option>
+							@endforeach
+						</select>
+						<select autocomplete="on" name="sort" onchange="search()" class="cursor-pointer border-0 bg-gray-50 mr-4">
 							<option value="price_desc" {{ \request()->get('sort') == "price_desc" ? "selected" : "" }}>
 								Price High
 							</option>
@@ -230,7 +216,7 @@
 								</h5>
 								<h5 class="mb-2">
 									<i class="text-red-50 bg-gray-300 p-1 px-3 border border-black rounded-md">
-									{{$property->price}}₽
+										{{$property->price}}₽
 									</i>
 								</h5>
 								<h5 class="">
@@ -313,10 +299,9 @@
 			</script>
 		</div>
 		<!-- End Property List  -->
+
+
 	</section>
-</form>
-<!-- End Main Content  -->
-
-
-</body>
-</html>
+		<!--  End Main Content  -->
+	</form>
+@endsection

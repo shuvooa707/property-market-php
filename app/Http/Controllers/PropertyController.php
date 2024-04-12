@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Category;
 use App\Models\Property;
 use App\Models\Review;
@@ -101,6 +102,9 @@ class PropertyController extends Controller
         $propertyName = $request->get('propertyName');
         $propertiesQuery = Property::where("title", "LIKE", "%$propertyName%");
         $categories = Category::all();
+
+        $cities = Address::all()->map(function ($address){ return $address->city; });
+
         if ( $request->exists("sort") ) {
             if ( $request->get("sort") == "price_desc" ) {
                 $propertiesQuery->orderBy("price", "desc");
@@ -121,9 +125,16 @@ class PropertyController extends Controller
         if ( $request->exists("categories") && $request->get("categories") ) {
             $propertiesQuery->whereIn("category_id", $request->get("categories"));
         }
+        if ( $request->exists("city") && $request->get("city") ) {
+            $city = $request->get("city");
+            $propertiesQuery->whereHas("address", function ($query) use($city) {
+                $query->where("city", $city);
+            });
+        }
         return view("property.search", [
             "properties" => $propertiesQuery->paginate(9),
-            "categories" => $categories
+            "categories" => $categories,
+            "cities" => $cities
         ]);
     }
 }
