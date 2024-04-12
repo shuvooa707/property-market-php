@@ -39,7 +39,8 @@
 		<small class="text-gray-600 text-xm" style="text-align: justify">
 			{{ substr($property->summery, 0, 55) }}...
 		</small>
-		<h5 class=" my-5  pb-0">
+		<hr>
+		<h5 class=" my-5 pb-3">
 			<small class="bg-indigo-200 text-indigo-950 rounded px-2 py-1">
 				<span class="mdi mdi-map-marker text-red-400"></span>
 				{{ $property->address->city }}
