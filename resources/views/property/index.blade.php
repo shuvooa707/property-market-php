@@ -108,7 +108,7 @@
 @section("main")
 	<!--  Main Content  -->
 	<section class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 p-0 m-0"
-	         style="max-height: 100vh; overflow-y: auto;">
+	         style="max-height: 100vh;">
 
 		<!--  Slick Slider  -->
 		<div class="slick-slider mb-2">

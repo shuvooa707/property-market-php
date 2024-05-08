@@ -49,7 +49,7 @@
     @yield("styles")
     @yield("scripts")
 </head>
-<body class="bg-gray-300">
+<body class="">
 
 <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
         type="button"

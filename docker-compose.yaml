@@ -1,0 +1,4 @@
+services:
+  property:
+    image: "php:8.1.28-fpm"
+    restart: always

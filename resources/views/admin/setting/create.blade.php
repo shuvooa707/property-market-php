@@ -1,7 +1,8 @@
 @extends("admin.layout.DashboardLayout")
 
 @section("script")
-	<script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script
+	<script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+
 @endsection
 
 @section("main")
