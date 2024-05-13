@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('PROPERTY_PAGE_OPENED_CHANNEL_{id}', function ($user, $id) {
-    print_r("-----------------U------------------------");
+Broadcast::channel('PROPERTY_PAGE_OPENED_CHANNEL_{id}', function (User $user, $id) {
+    Log::info($user);
     return $user;
 });

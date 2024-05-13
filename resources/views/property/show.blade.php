@@ -18,8 +18,40 @@
 @endsection
 
 @section("scripts")
-	<script type="text/javascript">
-		const Echo = window.Echo;
+	<script type="text/javascript" defer>
+		setTimeout(()=>{
+			const propertyId = {{ $property->id }} ;
+			const viewing = document.querySelector("#viewing");
+			const viewingC = document.querySelector("#viewing-c");
+			const usersMap = new Map();
+
+			function updateViewing(usersMap) {
+				viewing.innerHTML = `${usersMap.size}`;
+				viewingC.title = `${usersMap.size} People Are Viewing Thing Property Right Now`;
+			}
+
+			window.Echo
+				.join(`PROPERTY_PAGE_OPENED_CHANNEL_${propertyId}`)
+				.here(users => {
+					console.log(users);
+					users.forEach(user => {
+						usersMap.set(user.id, user);
+					});
+					console.log(usersMap)
+					updateViewing(usersMap);
+				})
+				.joining(user => {
+					console.log(user);
+					usersMap.set(user.id, user);
+					console.log(usersMap);
+					updateViewing(usersMap);
+				})
+				.leaving(user => {
+					usersMap.delete(user.id);
+					console.log(usersMap);
+					updateViewing(usersMap);
+				});
+		}, 1000);
 	</script>
 @endsection
 
@@ -466,4 +498,14 @@
 
 	</section>
 	<!-- End Main Content  -->
+
+	<div class="fixed bottom-0 right-0 z-50 w-[5rem] m-4">
+		<div title="" id="viewing-c" class="flex items-center justify-center border text-gray-950 border-gray-600 bg-white shadow-md rounded-lg p-0 px-3 py-2 text-center">
+			<i class="fa-solid fa-eye inline-block mr-1"></i>
+			<span id="viewing" class="inline-block">
+
+			</span>
+		</div>
+	</div>
+
 @endsection
