@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Category;
 use App\Models\Property;
 use App\Models\Review;
+use App\Service\PropertyService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
@@ -14,9 +15,10 @@ class PropertyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PropertyService $propertyService)
     {
-        $properties = Property::paginate(9);
+
+        $properties = $propertyService->getActiveProperties(9);
         $reviews = Review::all();
         $categories = Category::all();
 
@@ -28,6 +30,7 @@ class PropertyController extends Controller
             "slug" => \request()->url()
         ]);
     }
+
     public function byCategory(Request $request, $id)
     {
         $properties = Property::where("category_id", $id)->get();
@@ -103,31 +106,33 @@ class PropertyController extends Controller
         $propertiesQuery = Property::where("title", "LIKE", "%$propertyName%");
         $categories = Category::all();
 
-        $cities = Address::all()->map(function ($address){ return $address->city; });
+        $cities = Address::all()->map(function ($address) {
+            return $address->city;
+        });
 
-        if ( $request->exists("sort") ) {
-            if ( $request->get("sort") == "price_desc" ) {
+        if ($request->exists("sort")) {
+            if ($request->get("sort") == "price_desc") {
                 $propertiesQuery->orderBy("price", "desc");
             }
-            if ( $request->get("sort") == "price_asc" ) {
+            if ($request->get("sort") == "price_asc") {
                 $propertiesQuery->orderBy("price", "asc");
             }
         } else {
             $propertiesQuery->orderBy("price", "desc");
         }
-        if ( $request->exists("from") && is_numeric($request->get("from")) ) {
-            $propertiesQuery->where("price", ">", $request->get("from") );
+        if ($request->exists("from") && is_numeric($request->get("from"))) {
+            $propertiesQuery->where("price", ">", $request->get("from"));
         }
-        if ( $request->exists("to") && is_numeric($request->get("to"))  ) {
-            $propertiesQuery->where("price", "<", $request->get("to") );
+        if ($request->exists("to") && is_numeric($request->get("to"))) {
+            $propertiesQuery->where("price", "<", $request->get("to"));
         }
 
-        if ( $request->exists("categories") && $request->get("categories") ) {
+        if ($request->exists("categories") && $request->get("categories")) {
             $propertiesQuery->whereIn("category_id", $request->get("categories"));
         }
-        if ( $request->exists("city") && $request->get("city") ) {
+        if ($request->exists("city") && $request->get("city")) {
             $city = $request->get("city");
-            $propertiesQuery->whereHas("address", function ($query) use($city) {
+            $propertiesQuery->whereHas("address", function ($query) use ($city) {
                 $query->where("city", $city);
             });
         }

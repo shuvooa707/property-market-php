@@ -18,6 +18,18 @@
 			}
 		}, 2000)
 	</script>
+
+	{{-- Google Map --}}
+	<script>
+		(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+			key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
+			v: "weekly",
+			// Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+			// Add other bootstrap parameters as needed, using camel case.
+		});
+	</script>
+	{{-- End Google Map --}}
+
 @endsection
 
 @section("styles")
@@ -44,182 +56,54 @@
 		<!--  Main Content  -->
 		<section class="px-8 mx-8 mt-8 flex">
 
-			<!--  Search Panel  -->
-			<div class="col-span-1 bg-gray-50 shadow-md p-1" style="max-width: 380px; max-height: 80vh;">
-				<div class="text-center">
-					<strong class="w-full bg-blue-900 flex justify-between text-white p-2 block">Price</strong>
-					<div class="flex">
-						<div class="w-2/4 p-1">
-							<input id="from" value="{{ \request()->get('from') }}" type="text"
-							       class=" bg-gray-50 rounded-md w-full border border-gray-700" name="from">
-							<small>From</small>
-						</div>
-						<div class="w-2/4 p-1">
-							<input id="to" value="{{ \request()->get('to') }}" type="text"
-							       class=" bg-gray-50  rounded-md w-full border border-gray-700" name="to">
-							<small class="">To</small>
-						</div>
-					</div>
-				</div>
-				<div class="w-full">
-					<div class="w-full bg-blue-900 flex justify-between text-white p-2 mt-4">
-						<strong>Categories</strong>
-						<small class="text-white cursor-pointer">
-							clear
-						</small>
-					</div>
-					<!--  Category Container  -->
-					<div class="w-full p-2" style="max-height: 600px; overflow-x: hidden;">
-						<div class="w-full pb-3">
-							<input oninput="filterCategory(this)" type="text"
-							       class=" bg-gray-50  p-1 py-0 m-1.5 rounded-md w-full border-gray-200"
-							       placeholder="Search Category">
-						</div>
-						<div style="max-height: 600px; overflow-y: auto; overflow-x: hidden;">
-							@foreach($categories as $category)
-								<div data-value="{{ $category->name }}"
-								     class=" flex items-center mb-4 cursor-pointer" style="overflow: hidden;">
-									{{--								<input type="hidden" id="categoriesSelected" name="category" value="{{ \request()->get('category') }}">--}}
-
-									<input name="categories[]" onchange="updateCategories()"
-									       id="category-{{ $category->id }}" type="checkbox"
-									       value="{{ $category->id }}"
-									       {{ in_array($category->id, \request()->get('categories') ?? []) ? 'checked' : '' }}
-									       class="category-checkbox bg-gray-50  category w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
-									<label for="category-{{ $category->id }}"
-									       class=" bg-gray-50 ms-2 cursor-pointer text-sm font-medium text-gray-900">
-										{!!  $category->namewithicon !!}
-										<span class="bg-gray-700 text-gray-50 px-1.5 py-2 mr-1 rounded-md">
-										{{ $category->properties->count() }}
-									</span>
-									</label>
-								</div>
-							@endforeach
-						</div>
-					</div>
-					<!-- End Category Container  -->
-				</div>
-
-				<!--  Search Button  -->
-				<div class="w-full mt-4">
-					<button class="bg-blue-500 text-white p-2 w-full rounded-md">Search</button>
-				</div>
-				<div class="w-full mt-4 text-right pr-3">
-					<span onclick="clearCategories()" class="text-blue-400 cursor-pointer mr-2 ">reset all</span>
-				</div>
-				<!-- End Search Button  -->
-
-				<!-- End Search Button  -->
-				<script type="text/javascript">
-					let clearCategories = () => {
-						let categoryCheckboxs = document.querySelectorAll(".category-checkbox");
-						let from = document.querySelector("#from");
-						let to = document.querySelector("#to");
-						let searchForm = document.querySelector("#searchForm");
-						categoryCheckboxs.forEach(cb => {
-							cb.checked = false;
-						});
-						from.value = ``;
-						to.value = ``;
-						searchForm.submit();
-					}
-				</script>
-			</div>
-			<!--  End Search Panel  -->
 
 			<!--  Property List  -->
 			<div class="col-span-3" style="">
-				<!--  Search Input  -->
-				<div class="px-8 m-5">
-					<div class="bg-gray-50 py-2 shadow-md flex justify-between">
-						<input value="{{ \request()->get('propertyName') }}" id="search-property" type="text"
-						       name="propertyName" class="w-full bg-gray-50 p-1 outline-0 border-0"
-						       placeholder="Search By Property Name">
 
-						<div class="w-100 cursor-pointer flex text-gray-900">
-							<select autocomplete="on" name="city" onchange="search()" style="max-width: 220px"
-							        class="mx-8 cursor-pointer border-0 bg-gray-50">
-								@if( \request()->has('city') && strlen(\request()->get('city')) )
-									<option value="">
-										All Cities
-									</option>
-									<option value="{{ \request()->get('city') }}" selected>
-										{{ \request()->get('city') }}
-									</option>
-								@else
-									<option value="">
-										All Cities
-									</option>
-								@endif
-								@foreach($cities as $city)
-									<option value="{{ $city }}">
-										{{ $city }}
-									</option>
-								@endforeach
-							</select>
-							<select autocomplete="on" name="sort" onchange="search()"
-							        class="cursor-pointer border-0 bg-gray-50 mr-4">
-								<option value="price_desc" {{ \request()->get('sort') == "price_desc" ? "selected" : "" }}>
-									Price High
-								</option>
-								<option value="price_asc" {{ \request()->get('sort') == "price_asc" ? "selected" : "" }}>
-									Price Low
-								</option>
-								{{--                        <option value="popularity_desc">Popularity High</option>--}}
-								{{--                        <option value="popularity_asc">Popularity Low</option>--}}
-							</select>
-							<script>
-								var search = function (selectNode) {
-									document.querySelector("#searchForm").submit();
-								}
-							</script>
-						</div>
-					</div>
+				<!-- Map Search Panel  -->
+				<div class="col-span-1 bg-gray-50 shadow-md p-1 w-full" style="height: 300px">
+					<div id="map"></div>
 
-					<div class="w-full flex justify-end mt-1 pr-5">
-						<h1 id="list-view-switch" onclick="switchView('list')" style="font-size: 30px"
-						    class="mdi mdi-view-list cursor-pointer"></h1>
-						<h1 id="grid-view-switch" onclick="switchView('grid')" style="font-size: 30px"
-						    class="text-gray-500 mdi mdi-view-grid cursor-pointer"></h1>
-					</div>
-
-					<script type="text/javascript" defer>
-
-						const switchView = (type) => {
-							let listViewSwitch = document.querySelector("#list-view-switch");
-							let gridViewSwitch = document.querySelector("#grid-view-switch");
-							let gridViewContainer = document.querySelector("#properties-container");
-							let listViewContainer = document.querySelector("#properties-container-list");
-							if (type === 'list') {
-								listViewContainer.classList.remove("hidden");
-								gridViewContainer.classList.add("hidden");
-
-								listViewSwitch.classList.add("text-gray-500");
-								gridViewSwitch.classList.remove("text-gray-500");
-							} else {
-								listViewSwitch.classList.remove("text-gray-500");
-								gridViewSwitch.classList.add("text-gray-500");
-
-								gridViewContainer.classList.remove("hidden");
-								listViewContainer.classList.add("hidden");
-							}
-						}
-					</script>
-
-					<!--  Search Input Field Animation  -->
 					<script>
-						let pageSearchInput = document.querySelector("#search-property");
-						let text = "Search By Property Name";
-						let index = 0;
-						let interval = setInterval(() => {
-							pageSearchInput.placeholder = "🔍 " + text.slice(0, index);
-							index++;
-							if (index > text.length) index = 1
-						}, 100);
+						/**
+						 * @license
+						 * Copyright 2019 Google LLC. All Rights Reserved.
+						 * SPDX-License-Identifier: Apache-2.0
+						 */
+						async function initMap() {
+							// Request needed libraries.
+							const { Map } = await google.maps.importLibrary("maps");
+							const myLatlng = { lat: -25.363, lng: 131.044 };
+							const map = new google.maps.Map(document.getElementById("map"), {
+								zoom: 4,
+								center: myLatlng,
+							});
+							// Create the initial InfoWindow.
+							let infoWindow = new google.maps.InfoWindow({
+								content: "Click the map to get Lat/Lng!",
+								position: myLatlng,
+							});
+
+							infoWindow.open(map);
+							// Configure the click listener.
+							map.addListener("click", (mapsMouseEvent) => {
+								// Close the current InfoWindow.
+								infoWindow.close();
+								// Create a new InfoWindow.
+								infoWindow = new google.maps.InfoWindow({
+									position: mapsMouseEvent.latLng,
+								});
+								infoWindow.setContent(
+									JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2),
+								);
+								infoWindow.open(map);
+							});
+						}
+
+						initMap();
 					</script>
-					<!--  End Search Input Field Animation  -->
 				</div>
-				<!--  End Search Input  -->
+				<!--  End Map Search Panel  -->
 
 				<div class="px-0">
 					<div id="properties-container-list"

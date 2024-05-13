@@ -48,6 +48,8 @@
     @yield("title")
     @yield("styles")
     @yield("scripts")
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="">
 

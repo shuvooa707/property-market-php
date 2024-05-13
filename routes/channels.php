@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('PROPERTY_PAGE_OPENED_CHANNEL_{id}', function ($user, $id) {
+    print_r("-----------------U------------------------");
+    return $user;
 });

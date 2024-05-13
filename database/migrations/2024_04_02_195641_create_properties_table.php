@@ -29,6 +29,8 @@ return new class extends Migration
             $table->boolean("is_available");
             $table->unsignedInteger("sqft");
 
+            $table->enum("status", ["public", "hidden"])->default("available");
+
 
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger("company_id");

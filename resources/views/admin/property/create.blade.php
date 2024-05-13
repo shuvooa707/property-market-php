@@ -28,7 +28,7 @@
 					<div class="mb-5 mx-5">
 						<label for="thumbnailFile"
 						       class="cursor-pointer block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-							<span class="my-3"> Property Thumbnail</span>
+							<span class="my-3"> Property Thumbnail </span>
 							<img id="thumbnailFilePreview" class="h-1/4 rounded border-white max-w-full mt-4"
 							     src="https://flowbite.com/docs/images/examples/image-1@2x.jpg" alt="image description">
 						</label>
@@ -103,7 +103,7 @@
 					<!-- Price -->
 					<div class="mb-5 mx-5">
 						<label for="price"
-						       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+						       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price (Taka Per SQFT)</label>
 						<input type="number" name="price" id="price" step="1" min="0" max="9999999999"
 						       placeholder="Price"
 						       class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"

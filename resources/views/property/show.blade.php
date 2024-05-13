@@ -17,6 +17,13 @@
 	</style>
 @endsection
 
+@section("scripts")
+	<script type="text/javascript">
+		const Echo = window.Echo;
+	</script>
+@endsection
+
+
 @section("main")
 	<!--  Main Content  -->
 	<section class="grid grid-cols-12 px-5 py-5 bg-gray-300 justify-between h-full">

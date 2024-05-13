@@ -18,7 +18,7 @@ Trademarks
 ----------
 
 CKEditor is a trademark of CKSource Holding sp. z o.o. All other brand
-and product names are trademarks, registered trademarks or service
+and product names are trademarks, registered trademarks or Service
 marks of their respective holders.
 
 ---
